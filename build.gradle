@@ -1,0 +1,39 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+version '0.1'
+sourceCompatibility = '11'
+mainClassName = 'im.moonshot.curta.Runner'
+
+// Publish javadocs to a location github will support
+docsDirName = '../docs'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile     'org.junit.jupiter:junit-jupiter-params:5.3.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+}
+
+jar {
+    baseName = 'curta'
+    version =  '0.1'
+    manifest {
+        attributes "Main-Class": mainClassName
+    }
+}
+
+test {
+    useJUnitPlatform()
+    systemProperty "java.util.logging.config.file", "./logging.properties"
+}
+
+task runJar(type: JavaExec) {
+    main = "-jar"
+    args jar.archivePath
+}

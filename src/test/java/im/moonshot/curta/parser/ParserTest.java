@@ -90,4 +90,11 @@ class ParserTest {
         assertEquals("Expected RPAREN, but found ''.", exception.getMessage());
         assertEquals(19, exception.getErrorOffset());
     }
+
+    @Test
+    void shouldHandleOnlyOneRootFunction() {
+        var exception = assertThrows(ParseException.class, () ->
+            new Parser("add(1,2)Unexpected").parse()
+        );
+    }
 }

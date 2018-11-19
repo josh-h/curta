@@ -37,6 +37,7 @@ public class Parser {
 
         lexer.nextToken(); // Start the lexer
         Tree tree = function();
+        eat(Kind.END);
 
         logger.fine("Finished parsing");
         return tree;
